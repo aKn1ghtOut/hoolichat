@@ -49,5 +49,5 @@ jobs:
         path: build/app/outputs/apk/release/app-release.apk
         env-url: FOOBAR
         
-    - name: Use URL to upload to FURLS
+    # Use URL to upload to FURLS
     - run: curl 'https://furls.herokuapp.com/api/urls/60ad4e509e57750a891d2ef1' -X 'PATCH' -H authorization:\ Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiJhOWFkMzBmYmJkMWQ0YThmOWFhNjVlZDEyZDhhNjE1ZiIsImVtYWlsIjoiaXNoYmVzd2FsQGdtYWlsLmNvbSIsIm5hbWUiOiJJc2hpdCBCZXN3YWwifQ.cYRU8-2l7RodRa1wmUnKdACCGpBLIPshiW8e8uHp6yc -H 'content-type:\ application/json' --data-raw '{"original":"${{ env.FOOBAR }}"}' --compressed
