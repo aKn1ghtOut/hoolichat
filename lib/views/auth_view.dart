@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:beamer/beamer.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hoolichat/providers/api.dart';
 import 'package:provider/provider.dart';
 import 'package:toggle_switch/toggle_switch.dart';
