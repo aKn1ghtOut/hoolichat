@@ -186,6 +186,28 @@ class APIProvider with ChangeNotifier, DiagnosticableTreeMixin {
     });
   }
 
+  void newRoom(String title) {
+    var _body = json.encode({
+      'workspace': workspaceId,
+      'name': title,
+      'description': title,
+    });
+    print(_body);
+    http
+        .post(Uri.parse(domain + 'room'),
+            headers: {
+              'Authorization': jwtToken,
+              "Content-Type": "application/json",
+            },
+            body: _body)
+        .then((resp) {
+      print(resp.statusCode.toString() + resp.body);
+      if (resp.statusCode == 201) {
+        reloadRoomsAndUsers();
+      }
+    });
+  }
+
   void register(String email, String password, String fullname, String username,
       String phone, String workspaceid, bool newWorkspace,
       {Function(String)? failureCallback}) {

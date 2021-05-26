@@ -17,6 +17,8 @@ class RoomsView extends StatefulWidget {
 class _RoomsViewState extends State<RoomsView> {
   bool selectionOn = false;
 
+  String selectedTitle = '';
+
   void setSelectedOn() {
     if (!this.selectionOn)
       this.setState(() {
@@ -29,6 +31,12 @@ class _RoomsViewState extends State<RoomsView> {
       this.setState(() {
         selectionOn = false;
       });
+  }
+
+  void setTitle(String value) {
+    setState(() {
+      selectedTitle = value;
+    });
   }
 
   @override
@@ -55,6 +63,37 @@ class _RoomsViewState extends State<RoomsView> {
                         ' at signup!');
               })
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => showDialog<String>(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            title: Text('New Room'),
+            content: TextField(
+              onChanged: (String msg) {
+                setState(() {
+                  selectedTitle = msg;
+                });
+              },
+              decoration: InputDecoration(hintText: 'Room title'),
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.pop(context, 'Cancel'),
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () {
+                  context.read<APIProvider>().newRoom(selectedTitle);
+                  Navigator.pop(context, 'OK');
+                },
+                child: const Text('Add'),
+              ),
+            ],
+          ),
+        ),
+        child: const Icon(Icons.add),
+        backgroundColor: Theme.of(context).accentColor,
       ),
       backgroundColor: Theme.of(context).primaryColor,
       body: Row(
