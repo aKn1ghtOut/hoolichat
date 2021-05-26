@@ -124,6 +124,8 @@ HooliChat will, by default, log:
 
 You need a proper editor for running flutter applications. Read this [guide](https://flutter.dev/docs/get-started/editor) to make sure you are prepared.
 
+### Locally
+
 ### Using the Editor
 You can refer to this [guide](https://flutter.dev/docs/get-started/test-drive) to run the application through your preferred editor
 
