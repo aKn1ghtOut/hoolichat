@@ -96,6 +96,7 @@ class _RoomsViewState extends State<RoomsView> {
                               onSelectEnable: this.setSelectedOn,
                               goToRoom: (String roomId) {
                                 Beamer.of(context)
+                                    // ignore: unnecessary_brace_in_string_interps
                                     .beamToNamed('/room/${roomId}');
                               },
                             ),

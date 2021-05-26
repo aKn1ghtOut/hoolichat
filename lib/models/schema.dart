@@ -1,9 +1,5 @@
 import 'package:moor/moor.dart';
 
-import 'package:moor/ffi.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart' as p;
-
 part 'schema.g.dart';
 
 @DataClassName("User")

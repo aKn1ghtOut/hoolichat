@@ -162,7 +162,7 @@ class UsersCompanion extends UpdateCompanion<User> {
     this.display = const Value.absent(),
     required String email,
     required String status,
-  })  : userId = Value(userId),
+  })   : userId = Value(userId),
         fullName = Value(fullName),
         email = Value(email),
         status = Value(status);
@@ -503,7 +503,7 @@ class RoomsCompanion extends UpdateCompanion<Room> {
     this.display = const Value.absent(),
     required String roomId,
     required DateTime createdAt,
-  })  : title = Value(title),
+  })   : title = Value(title),
         roomId = Value(roomId),
         createdAt = Value(createdAt);
   static Insertable<Room> custom({
@@ -837,7 +837,7 @@ class MessagesCompanion extends UpdateCompanion<Message> {
     required String senderId,
     required String roomId,
     required DateTime createdAt,
-  })  : messageId = Value(messageId),
+  })   : messageId = Value(messageId),
         senderId = Value(senderId),
         roomId = Value(roomId),
         createdAt = Value(createdAt);
@@ -1043,6 +1043,7 @@ class $MessagesTable extends Messages with TableInfo<$MessagesTable, Message> {
   }
 }
 
+// ignore: unused_element
 abstract class _$MyDatabase extends GeneratedDatabase {
   _$MyDatabase(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
   late final $UsersTable users = $UsersTable(this);
