@@ -114,4 +114,8 @@ class AppDatabase extends _$AppDatabase {
         createdAt: Value(DateTime.now()),
       )));
   }
+
+  void deleteMessage(String messageId) {
+    (delete(messages)..where((tbl) => tbl.messageId.equals(messageId))).go();
+  }
 }

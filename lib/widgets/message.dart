@@ -10,13 +10,14 @@ class Message extends StatelessWidget {
   const Message(
       {Key? key,
       required this.userId,
+      required this.messageId,
       this.own = false,
       this.last = false,
       this.content =
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."})
       : super(key: key);
 
-  final String content, userId;
+  final String content, userId, messageId;
   final bool own, last;
 
   @override
@@ -30,13 +31,7 @@ class Message extends StatelessWidget {
             CupertinoContextMenuAction(
               child: const Text('Delete'),
               onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            CupertinoContextMenuAction(
-              child: const Text('Star'),
-              onPressed: () {
-                Navigator.pop(context);
+                locator<AppDatabase>().deleteMessage(messageId);
               },
             ),
           ],
@@ -93,7 +88,10 @@ class Message extends StatelessWidget {
                         stream: locator<AppDatabase>().watchUser(userId),
                         builder: (context, snapshot) {
                           if (!snapshot.hasData) return Container();
-                          return Text(snapshot.data?.fullName ?? '');
+                          return Text(
+                            snapshot.data?.fullName ?? '',
+                            style: Theme.of(context).textTheme.bodyText1,
+                          );
                         })
                 ],
               ),

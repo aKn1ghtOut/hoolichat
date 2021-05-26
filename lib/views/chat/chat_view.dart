@@ -96,6 +96,9 @@ class _ChatViewState extends State<ChatView> {
                                         label: 'Today',
                                       ),
                                       Ms.Message(
+                                        messageId:
+                                            snapshot.data?[index].messageId ??
+                                                '',
                                         content:
                                             snapshot.data?[index].content ?? '',
                                         key: ValueKey(
@@ -113,6 +116,8 @@ class _ChatViewState extends State<ChatView> {
                                     ],
                                   );
                                 return Ms.Message(
+                                  messageId:
+                                      snapshot.data?[index].messageId ?? '',
                                   content: snapshot.data?[index].content ?? '',
                                   key:
                                       ValueKey(snapshot.data?[index].messageId),
