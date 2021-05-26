@@ -39,8 +39,8 @@ HooliChat is an open source frontend using [Flutter](https://flutter.dev/) that 
       <img alt="Flutter" src="https://forthebadge.com/images/badges/built-for-android.svg">
     </a>
     <br>
-    <a href="https://github.com/aKn1ghtOut/hoolichat/actions?query=workflow%3Anode.js.yml+branch%3Amaster">
-      <img alt="Build status" src="https://github.com/aKn1ghtOut/hoolichat/actions/workflows/node.js.yml/badge.svg">
+    <a href="https://github.com/aKn1ghtOut/hoolichat/actions?query=workflow%3Aflutter-ci.yml+branch">
+      <img alt="Build status" src="https://github.com/aKn1ghtOut/hoolichat/actions/workflows/flutter-ci.yml/badge.svg">
     </a>
     <a href="https://flutter.dev/"><img alt="Flutter 2.x" src="https://img.shields.io/badge/flutter-2.x-blue.svg?logo=node.js&style=flat"></a>
 </p>
@@ -131,7 +131,7 @@ You can refer to this [guide](https://flutter.dev/docs/get-started/test-drive) t
 
 ### Using the CLI
 
-#### Make sure you have a device connected to your development platform using the [guide]()
+#### Make sure you have a device connected to your development platform using the [guide](https://flutter.dev/docs/get-started/install)
 
 The easiest way to run the HooliChat is through the CLI:
 
