@@ -99,11 +99,41 @@ class APIProvider with ChangeNotifier, DiagnosticableTreeMixin {
         .then((response) {
       print(response.statusCode);
       if (response.statusCode == 202) {
+        Map<String, dynamic> respBody = json.decode(response.body);
+        String tempToken = respBody['token'];
+        Map<String, dynamic> userInfo = respBody['userInfo'];
+        print("Workspace id received: " + tempToken);
         if (newWorkspace) {
+          http
+              .post(
+            Uri.parse(domain + 'workspace/'),
+            headers: {
+              "Content-Type": "application/json",
+              'Authorization': tempToken
+            },
+            body: json.encode({'name': workspaceid}),
+          )
+              .then((resp) {
+            Map<String, dynamic> workDet = json.decode(resp.body);
+            if (resp.statusCode == 201) {
+              SharedPreferences.getInstance().then((sp) {
+                sp.setString("authToken", tempToken);
+                sp.setString("workspaceId", workDet['_id']);
+                sp.setString("_userId", userInfo['_id'].toString());
+
+                _loggedIn = true;
+                _jwtToken = tempToken;
+                _userId = userInfo['_id'];
+                _workspaceId = workDet['_id'];
+
+                reloadRoomsAndUsers();
+
+                notifyListeners();
+              });
+            } else
+              failureCallback!("Invalid Workspace ID");
+          });
         } else {
-          Map<String, dynamic> respBody = json.decode(response.body);
-          String tempToken = respBody['token'];
-          Map<String, dynamic> userInfo = respBody['userInfo'];
           print("Workspace id received: " + tempToken);
           http.patch(
             Uri.parse(domain + 'workspace/add-user/' + workspaceid),
@@ -177,11 +207,41 @@ class APIProvider with ChangeNotifier, DiagnosticableTreeMixin {
         .then((response) {
       if (response.statusCode == 201) {
         print(response.body);
+        Map<String, dynamic> respBody = json.decode(response.body);
+        String tempToken = respBody['token'];
+        Map<String, dynamic> userInfo = respBody['userInfo'];
+        print("Workspace id received: " + tempToken);
         if (newWorkspace) {
+          http
+              .post(
+            Uri.parse(domain + 'workspace/'),
+            headers: {
+              "Content-Type": "application/json",
+              'Authorization': tempToken
+            },
+            body: json.encode({'name': workspaceid}),
+          )
+              .then((resp) {
+            Map<String, dynamic> workDet = json.decode(resp.body);
+            if (resp.statusCode == 201) {
+              SharedPreferences.getInstance().then((sp) {
+                sp.setString("authToken", tempToken);
+                sp.setString("workspaceId", workDet['_id']);
+                sp.setString("_userId", userInfo['_id'].toString());
+
+                _loggedIn = true;
+                _jwtToken = tempToken;
+                _userId = userInfo['_id'];
+                _workspaceId = workDet['_id'];
+
+                reloadRoomsAndUsers();
+
+                notifyListeners();
+              });
+            } else
+              failureCallback!("Invalid Workspace ID");
+          });
         } else {
-          Map<String, dynamic> respBody = json.decode(response.body);
-          String tempToken = respBody['token'];
-          Map<String, String> userInfo = respBody['userInfo'];
           http.post(
             Uri.parse(domain + 'workspace/' + workspaceid),
             headers: {
@@ -199,6 +259,8 @@ class APIProvider with ChangeNotifier, DiagnosticableTreeMixin {
                 _loggedIn = true;
                 _jwtToken = tempToken;
                 _userId = userInfo['_id'];
+
+                reloadRoomsAndUsers();
 
                 notifyListeners();
               });
@@ -222,6 +284,7 @@ class APIProvider with ChangeNotifier, DiagnosticableTreeMixin {
       sharedPreferences.remove("_userId");
       _loaded = true;
       notifyListeners();
+      locator<AppDatabase>().logout();
     });
   }
 

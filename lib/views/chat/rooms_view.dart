@@ -5,6 +5,7 @@ import 'package:hoolichat/providers/api.dart';
 import 'package:hoolichat/widgets/rooms_list.dart';
 
 import 'package:provider/provider.dart';
+import 'package:share/share.dart';
 
 class RoomsView extends StatefulWidget {
   RoomsView([Key? key]) : super(key: key);
@@ -44,7 +45,16 @@ class _RoomsViewState extends State<RoomsView> {
         ),
         elevation: 0.0,
         backgroundColor: Theme.of(context).primaryColor,
-        actions: [IconButton(icon: Icon(Icons.add), onPressed: () {})],
+        actions: [
+          IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                Share.share(
+                    'Join my Hoolichat server today. Use Workspace ID:' +
+                        context.read<APIProvider>().workspaceId +
+                        ' at signup!');
+              })
+        ],
       ),
       backgroundColor: Theme.of(context).primaryColor,
       body: Row(

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:beamer/beamer.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hoolichat/providers/api.dart';
 import 'package:provider/provider.dart';
 import 'package:toggle_switch/toggle_switch.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class AuthView extends StatefulWidget {
   AuthView({Key? key}) : super(key: key);
@@ -188,9 +187,36 @@ class _AuthViewState extends State<AuthView> {
                     if (side == 'login') {
                       context
                           .read<APIProvider>()
-                          .login(email, password, workspaceInput, false,
+                          .login(email, password, workspaceInput, newWorkspace,
                               failureCallback: (error) {
                         print(error);
+                        Fluttertoast.showToast(
+                            msg: error,
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Theme.of(context).accentColor,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
+                      });
+                    } else {
+                      context.read<APIProvider>().register(
+                          email,
+                          password,
+                          fullname,
+                          username,
+                          phone,
+                          workspaceInput,
+                          newWorkspace, failureCallback: (error) {
+                        print(error);
+                        Fluttertoast.showToast(
+                            msg: error,
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Theme.of(context).accentColor,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
                       });
                     }
                   },

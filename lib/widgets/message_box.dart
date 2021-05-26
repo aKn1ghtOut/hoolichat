@@ -42,11 +42,6 @@ class _MessageBoxState extends State<MessageBox> {
                     Center(
                         child: Row(
                       children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.add_rounded),
-                          color: Theme.of(context).backgroundColor,
-                        ),
                         Expanded(
                             child: TextField(
                           controller: boxController,
